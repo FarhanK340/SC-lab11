@@ -3,19 +3,23 @@ package recursion;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 public class RecursiveBinarySearchTest {
 
     @Test
-    public void testStringBinarySearch() {
-        String[] words = {"apple", "banana", "cherry", "date", "elderberry"};
-        assertEquals(2, RecursiveBinarySearch.binarySearchRecursive(words, "cherry", 0, words.length - 1));
-        assertEquals(-1, RecursiveBinarySearch.binarySearchRecursive(words, "fig", 0, words.length - 1));
-        assertEquals(0, RecursiveBinarySearch.binarySearchRecursive(words, "apple", 0, words.length - 1));
+    public void testFindAllIndices() {
+        int[] numbers = {1, 2, 2, 3, 4, 5, 5, 5, 6};
+        List<Integer> indices = RecursiveBinarySearch.findAllIndices(numbers, 5, 0, numbers.length - 1);
+        assertEquals(List.of(5, 6, 7), indices);
+
+        indices = RecursiveBinarySearch.findAllIndices(numbers, 10, 0, numbers.length - 1);
+        assertTrue(indices.isEmpty());
     }
     
     @Test(expected = IllegalArgumentException.class)
 	public void testNullArray() {
-	    RecursiveBinarySearch.binarySearchRecursive(null, null, 0, 0);
+	    RecursiveBinarySearch.findAllIndices(null, 0, 0, 0);
 	}
 
 }

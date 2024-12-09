@@ -1,23 +1,40 @@
 package recursion;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RecursiveBinarySearch {
 
-	public static int binarySearchRecursive(String[] array, String target, int low, int high) {
-		if (array == null || target == null) {
-			throw new IllegalArgumentException("Array or target cannot be null");
-		}
-		if (low > high) {
-			return -1; // Target not found
-		}
+    public static List<Integer> findAllIndices(int[] array, int target, int low, int high) {
+        if (array == null) {
+            throw new IllegalArgumentException("Array cannot be null");
+        }
 
-		int mid = low + (high - low) / 2;
+        List<Integer> indices = new ArrayList<>();
+        findAllIndicesHelper(array, target, low, high, indices);
+        Collections.sort(indices);
+        return indices;
+    }
 
-		if (array[mid].equals(target)) {
-			return mid;
-		} else if (array[mid].compareTo(target) > 0) {
-			return binarySearchRecursive(array, target, low, mid - 1);
-		} else {
-			return binarySearchRecursive(array, target, mid + 1, high);
-		}
-	}
+    private static void findAllIndicesHelper(int[] array, int target, int low, int high, List<Integer> indices) {
+        if (low > high) {
+            return;
+        }
+
+        int mid = low + (high - low) / 2;
+
+        if (array[mid] == target) {
+            // Add the current index
+            indices.add(mid);
+
+            // Search both left and right for other occurrences
+            findAllIndicesHelper(array, target, low, mid - 1, indices);
+            findAllIndicesHelper(array, target, mid + 1, high, indices);
+        } else if (array[mid] > target) {
+            findAllIndicesHelper(array, target, low, mid - 1, indices);
+        } else {
+            findAllIndicesHelper(array, target, mid + 1, high, indices);
+        }
+    }
 }
+
