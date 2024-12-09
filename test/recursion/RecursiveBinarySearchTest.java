@@ -3,20 +3,19 @@ package recursion;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class RecursiveBinarySearchTest{
+public class RecursiveBinarySearchTest {
 
-	// Testcases for Integer Binary Search
-	@Test
-	public void testIntegerBinarySearch() {
-	    int[] array = {1, 3, 5, 7, 9, 11};
-	    assertEquals(3, RecursiveBinarySearch.binarySearchRecursive(array, 7));
-	    assertEquals(-1, RecursiveBinarySearch.binarySearchRecursive(array, 4));
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
+    @Test
+    public void testStringBinarySearch() {
+        String[] words = {"apple", "banana", "cherry", "date", "elderberry"};
+        assertEquals(2, RecursiveBinarySearch.binarySearchRecursive(words, "cherry", 0, words.length - 1));
+        assertEquals(-1, RecursiveBinarySearch.binarySearchRecursive(words, "fig", 0, words.length - 1));
+        assertEquals(0, RecursiveBinarySearch.binarySearchRecursive(words, "apple", 0, words.length - 1));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
 	public void testNullArray() {
-	    RecursiveBinarySearch.binarySearchRecursive(null, 5);
+	    RecursiveBinarySearch.binarySearchRecursive(null, null, 0, 0);
 	}
-
 
 }
