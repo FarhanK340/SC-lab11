@@ -18,7 +18,6 @@ public class RecursiveBinarySearch {
 
     private static void findAllIndicesHelper(int[] array, int target, int low, int high, List<Integer> indices) {
         if (low > high) {
-            return;
         }
 
         int mid = low + (high - low) / 2;
